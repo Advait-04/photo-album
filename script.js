@@ -133,7 +133,7 @@ function clickHandler() {
 
     const glassDivHTML = `
 
-    <div class="glass-menu me-3 mt-5 d-flex flex-column">
+    <div class="glass-menu me-md-3 me-xl-4 mt-5 d-flex flex-column">
         <div class="btn-group mb-4">
             <button type="button" class="op-button btn btn-danger dropdown-toggle fs-5" data-bs-toggle="dropdown" aria-expanded="false">
             Options
@@ -153,7 +153,7 @@ function clickHandler() {
         </div>
 
         <div class="d-btn-div">
-            <button type="button" class="btn btn-success fs-5" onclick="downloadImage()">Download</button>
+            <button type="button" class="btn btn-success fs-5 d-btn" onclick="downloadImage()">Download</button>
         </div>
 
         <div class="glass-comment">

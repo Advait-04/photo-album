@@ -66,9 +66,26 @@ img {
     cursor: pointer;
 }
 
-.close-btn {
-    width: 3.5rem;
-    position: relative;
+@media screen and (max-width: 425px) {
+    .glass {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-    top: 0px;
+    .glass-menu {
+        width: 80%;
+        margin-right: 0px !important;
+    }
+
+    .d-btn {
+        width: 100%;
+    }
+
+    .glass-img-div {
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 2500px) {
 }
