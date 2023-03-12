@@ -91,13 +91,50 @@ async function makeThumbnail() {
     writeImage(image, glassImage);
 }
 
+function makeQR() {
+    const glassImage = getGlassImage();
+
+    var qrcode = new QRCode(document.querySelector(".glass-comment"), {
+        text: `${glassImage.src}`,
+        width: 200,
+        height: 200,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H,
+    });
+}
+
+async function addTint(color) {
+    const glassImage = getGlassImage();
+    const image = await Jimp.read(glassImage.src);
+
+    image.color([{ apply: `${color}`, params: [50] }]);
+
+    writeImage(image, glassImage);
+}
+
+async function downloadImage() {
+    const glassImage = getGlassImage();
+
+    const image = await fetch(glassImage.src);
+    const imageBlog = await image.blob();
+    const imageURL = URL.createObjectURL(imageBlog);
+
+    const link = document.createElement("a");
+    link.href = imageURL;
+    link.download = "image file name here";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 function clickHandler() {
     currentImgElement = this;
 
     const glassDivHTML = `
 
-    <div class="glass-menu me-3 mt-5">
-        <div class="btn-group">
+    <div class="glass-menu me-3 mt-5 d-flex flex-column">
+        <div class="btn-group mb-4">
             <button type="button" class="op-button btn btn-danger dropdown-toggle fs-5" data-bs-toggle="dropdown" aria-expanded="false">
             Options
             </button>
@@ -109,8 +146,19 @@ function clickHandler() {
                 <li><a class="dropdown-item op-item fs-6" onclick="makeAvatar()">make Avatar</a></li>
                 <li><a class="dropdown-item op-item fs-6" onclick="makeThumbnail()">make Thumbnail</a></li>
                 <li><a class="dropdown-item op-item fs-6" onclick="makeQR()">make QR Code</a></li>
+                <li><a class="dropdown-item op-item fs-6" onclick="addTint('red')">more red-ish pls</a></li>
+                <li><a class="dropdown-item op-item fs-6" onclick="addTint('blue')">more blue-ish pls</a></li>
+                <li><a class="dropdown-item op-item fs-6" onclick="addTint('green')">more green-ish pls</a></li>
             </ul>
         </div>
+
+        <div class="d-btn-div">
+            <button type="button" class="btn btn-success fs-5" onclick="downloadImage()">Download</button>
+        </div>
+
+        <div class="glass-comment">
+        </div>
+
     </div>
 
 
