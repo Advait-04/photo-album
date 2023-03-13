@@ -3,8 +3,6 @@ const body = document.querySelector("body");
 
 var currentImgElement;
 
-console.log(imgElement);
-
 imgElement.forEach((itm) => {
     itm.addEventListener("click", clickHandler, false);
 });
@@ -57,18 +55,15 @@ async function rgbIshChecker() {
         addIsh("The Image is Blueish", "Blue");
     } else if (gIsh > pixelArray.length / 2) {
         addIsh("The Image is Greenish", "Green");
+    } else {
+        addIsh("The Image is balanced", "Blue");
     }
-
-    console.log(pixelArray.length);
-    console.log(rIsh);
-    console.log(gIsh);
-    console.log(bIsh);
 }
 
 function addIsh(msg, color) {
     console.log("helo");
 
-    const glassComment = document.querySelector(".glass-comment");
+    const tintMsg = document.querySelector(".tint-msg");
     var buttonClass;
 
     if (color === "Red") {
@@ -79,10 +74,9 @@ function addIsh(msg, color) {
         buttonClass = "btn-success";
     }
 
-    glassComment.innerHTML += `
-    <div class="d-btn-div fs-5 mt-4">
+    console.log(tintMsg);
+    tintMsg.innerHTML = `
     <button type="button" class="btn ${buttonClass}">${msg}</button>
-    </div>
     `;
 }
 
@@ -181,7 +175,7 @@ function clickHandler() {
             Options
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item op-item fs-6" onclick="rgbIshChecker()">Check if r-ish, g-ish, b-ish</a></li>
+                <li><a class="dropdown-item op-item fs-6" onclick="rgbIshChecker()">check if r-ish, g-ish, b-ish</a></li>
                 <li><a class="dropdown-item op-item fs-6" onclick="increaseBrightness()">increase Brightness</a></li>
                 <li><a class="dropdown-item op-item fs-6" onclick="toGrayscale()">to GrayScale</a></li>
                 <li><a class="dropdown-item op-item fs-6" onclick="reduceResolution()">reduce Resolution</a></li>
@@ -199,6 +193,9 @@ function clickHandler() {
         </div>
 
         <div class="glass-comment mt-4">
+        </div>
+
+        <div class="d-btn-div fs-5 mt-4 tint-msg">
         </div>
 
     </div>
