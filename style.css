@@ -76,7 +76,7 @@ img {
     }
 
     .glass-menu {
-        width: 80%;
+        width: 60%;
         margin-right: 0px !important;
     }
 
@@ -85,9 +85,21 @@ img {
     }
 
     .glass-img-div {
-        width: 90%;
+        width: 80%;
     }
 }
 
-@media screen and (min-width: 2500px) {
+@media screen and (min-width: 375px) and (max-width: 450px) {
+    .glass-menu {
+        width: 50%;
+        margin-right: 0px !important;
+    }
+
+    .d-btn {
+        width: 100%;
+    }
+
+    .glass-img-div {
+        width: 70%;
+    }
 }

@@ -37,11 +37,53 @@ async function rgbIshChecker() {
 
     var rIsh = 0;
     var gIsh = 0;
-    var gIsh = 0;
+    var bIsh = 0;
 
-    await pixelArray.forEach((itm) => {
-        console.log(itm);
+    // itm_0 = red itm_1 = green itm_2 = green
+
+    pixelArray.forEach((itm) => {
+        if (itm[0] > itm[1] + itm[2]) {
+            rIsh += 1;
+        } else if (itm[1] > itm[0] + itm[2]) {
+            gIsh += 1;
+        } else if (itm[2] > itm[1] + itm[0]) {
+            bIsh += 1;
+        }
     });
+
+    if (rIsh > pixelArray.length / 2) {
+        addIsh("The Image is Redish", "Red");
+    } else if (bIsh > pixelArray.length / 2) {
+        addIsh("The Image is Blueish", "Blue");
+    } else if (gIsh > pixelArray.length / 2) {
+        addIsh("The Image is Greenish", "Green");
+    }
+
+    console.log(pixelArray.length);
+    console.log(rIsh);
+    console.log(gIsh);
+    console.log(bIsh);
+}
+
+function addIsh(msg, color) {
+    console.log("helo");
+
+    const glassComment = document.querySelector(".glass-comment");
+    var buttonClass;
+
+    if (color === "Red") {
+        buttonClass = "btn-danger";
+    } else if (color === "Blue") {
+        buttonClass = "btn-primary";
+    } else {
+        buttonClass = "btn-success";
+    }
+
+    glassComment.innerHTML += `
+    <div class="d-btn-div fs-5 mt-4">
+    <button type="button" class="btn ${buttonClass}">${msg}</button>
+    </div>
+    `;
 }
 
 async function toGrayscale() {
@@ -156,7 +198,7 @@ function clickHandler() {
             <button type="button" class="btn btn-success fs-5 d-btn" onclick="downloadImage()">Download</button>
         </div>
 
-        <div class="glass-comment">
+        <div class="glass-comment mt-4">
         </div>
 
     </div>
